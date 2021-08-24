@@ -3,6 +3,7 @@
 " IN YOUR USER DIRECTORY AND SAVE IT AS WINDOWS=_vimrc
 " AND LINUX=.vimrc. RESTART YOUR VIM AND HAVE FUN!!!
 syntax on
+let mapleader = " "
 
 set clipboard=unnamed
 set tabstop=4
@@ -51,6 +52,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'https://git::@github.com/preservim/nerdcommenter.git'
 call plug#end()
 
 " scheme
@@ -61,9 +65,11 @@ let g:lightline = {
 colorscheme onedark
 
 " plugin related configs
+source $HOME\.vim\plug-config\coc.vim
+let g:ctrlp_user_command = ['.git\', 'git --git-dir=%s\.git ls-files -oc --exclude-standard']
+let g:NERDSpaceDelims = 1
 
 " remaps
-let mapleader = " "
 nnoremap <leader>o o<esc>
 nmap <leader>l :PlugInstall<CR>
 nmap <leader>n :NERDTreeToggle<CR>
@@ -84,6 +90,12 @@ nmap <leader>c :tabclose<CR>
 " Mapping to reload conf
 nmap <leader>so :source $HOME\_vimrc<CR>
 
+" Mapping to open vimrc file
+nmap <leader>rc :e $HOME\_vimrc<CR>
+
+" Mapping to quicksafe
+nmap <silent><F1> :w<CR>
+
 " autocommands
 fun! TrimWhitespace()
     let l:save = winsaveview()
@@ -95,4 +107,5 @@ augroup pers_autocmd
     autocmd!
     autocmd BufWritePre * :call TrimWhitespace()
     autocmd VimEnter * NERDTree
+    autocmd VimEnter * wincmd w
 augroup END
