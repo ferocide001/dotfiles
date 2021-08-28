@@ -15,7 +15,6 @@ set nohlsearch
 set hidden
 set noerrorbells
 set expandtab
-" set nowrap
 set nobackup
 set undodir=$HOME\.vim\undodir
 set undofile
@@ -54,7 +53,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'https://git::@github.com/preservim/nerdcommenter.git'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 " scheme
@@ -85,7 +85,17 @@ nmap <leader>7 7gt
 nmap <leader>8 8gt
 nmap <leader>9 9gt
 nmap <leader>t :tabedit<space>
-nmap <leader>c :tabclose<CR>
+nmap <leader>tc :tabclose<CR>
+" Fugitive
+nnoremap <leader>gs :G<cr>
+nmap <leader>gc :Git commit<cr>
+nmap <leader>gp :Git push<cr>
+nmap <leader>gpu :Git pull<cr>
+" splits
+nmap <leader>sh :sp<cr>
+nmap <leader>sv :vsp<cr>
+" sessions
+nmap <leader>s1 :source $HOME\.vim\sessions\smartassistant<cr>
 
 " Mapping to reload conf
 nmap <leader>so :source $HOME\_vimrc<CR>
